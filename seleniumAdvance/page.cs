@@ -25,13 +25,42 @@ namespace seleniumAdvance
         [FindsBy(How = How.Name, Using = "passwd")]
         private IWebElement passwdField;
 
-        public void SetLoginText(string text) {
-        loginField.SendKeys(text);
+        string str;
+
+        [FindsBy(How = How.ClassName, Using = "ns-view-messages-item-wrap")]
+        private IWebElement postList;
+
+        [FindsBy(How = How.XPath, Using = "//*[@class = 'mail-User-Name']")]
+        private IWebElement userMenu;
+
+        [FindsBy(How = How.XPath, Using = "//div[@class = 'b-mail-dropdown__item'][6]/a")]
+        private IWebElement exit;
+
+        public void setLoginAndPasswd(string login, string passwd) {
+            new Actions(driver).SendKeys(loginField, login).SendKeys(passwdField, passwd).Build().Perform();
         }
 
-        public void SetPasswdText(string text) {
-            passwdField.SendKeys(text);
+        public void logout() {
+            new Actions(driver).Click(userMenu).Click(exit).Build().Perform();
+        }
+
+        public void login() {
             passwdField.Submit();
         }
+
+        public bool isPasswdDisplayed() {
+            if (passwdField.Displayed) {
+                return true;
+            }
+            return false;
+        }
+
+        public bool isPostDysplayed() {
+            if (postList.Displayed) {
+                return true;
+            }
+            return true;
+        }
+        
     }
 }
