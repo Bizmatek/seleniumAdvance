@@ -36,8 +36,13 @@ namespace seleniumAdvance
         [FindsBy(How = How.XPath, Using = "//div[@class = 'b-mail-dropdown__item'][6]/a")]
         private IWebElement exit;
 
-        public void setLoginAndPasswd(string login, string passwd) {
-            new Actions(driver).SendKeys(loginField, login).SendKeys(passwdField, passwd).Build().Perform();
+        public void setLogin(string login) {
+            new Actions(driver).SendKeys(loginField, login).Build().Perform();
+        }
+
+        public void setPasswd(string passwd)
+        {
+            new Actions(driver).SendKeys(passwdField, passwd).Build().Perform();
         }
 
         public void logout() {
